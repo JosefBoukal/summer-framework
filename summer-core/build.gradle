@@ -1,0 +1,7 @@
+description = 'The Summer Framework Core API'
+
+dependencies {
+    compile("org.springframework:spring-context:${springVersion}")
+
+    testCompile project(":summer-test-helper")
+}

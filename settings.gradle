@@ -1,0 +1,7 @@
+rootProject.name = 'summerframework'
+
+include 'summer-test-helper'
+include 'summer-core'
+include 'summer-data'
+include 'summer-rest'
+include 'summer-report'

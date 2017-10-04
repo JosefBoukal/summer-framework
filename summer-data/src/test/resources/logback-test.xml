@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/summerframework/logback/logback-test-defaults.xml"/>
+
+    <logger name="org.summerframework.experimental.data.model.definition" level="DEBUG"/>
+
+</configuration>

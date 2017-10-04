@@ -1,0 +1,6 @@
+description = 'The Summer Framework Report API'
+
+dependencies {
+    compile(project(":summer-core"))
+    compile("org.springframework:spring-context:${springVersion}")
+}

@@ -1,0 +1,58 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = "4.1"
+}
+
+allprojects {
+    group = "org.summerframework"
+    version = qualifyVersionIfNecessary(version)
+
+    apply plugin: "java"
+    apply plugin: "maven"
+
+    ext.springVersion = "5.0.0.RC3"
+    ext.springDataVersion = "2.0.0.RC2"
+    ext.jackson2Version = "2.9.0"
+    ext.lombokVersion = "1.16.16"
+    ext.slf4jVersion = "1.7.25"
+    ext.junit4Version = "4.12"
+    ext.logbackVersion = "1.2.3"
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+
+        maven {
+            url("http://repo.spring.io/milestone/")
+        }
+    }
+
+    dependencies {
+        compile("org.springframework:spring-core:${springVersion}")
+        compileOnly("org.projectlombok:lombok:${lombokVersion}")
+        compile("org.slf4j:slf4j-api:${slf4jVersion}")
+        compile("ch.qos.logback:logback-classic:${logbackVersion}")
+
+        testCompile("junit:junit:${junit4Version}")
+        testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+}
+
+def qualifyVersionIfNecessary(version) {
+    if (rootProject.hasProperty("BRANCH_NAME")) {
+        def qualifier = rootProject.getProperty("BRANCH_NAME")
+        if (qualifier.startsWith("FR-")) {
+            return version.replace('BUILD', qualifier)
+        }
+    }
+    return version
+}
