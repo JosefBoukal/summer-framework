@@ -1,4 +1,4 @@
-rootProject.name = 'summerframework'
+rootProject.name = 'summer-framework'
 
 include 'summer-test-helper'
 include 'summer-core'
