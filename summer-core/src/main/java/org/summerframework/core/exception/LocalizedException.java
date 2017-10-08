@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * The localized runtime exception. All exceptions in an application should be localized so it may be propagated up to
- * User Interfaces without any need of wrapping.
+ * User Interfaces without any need of wrapping when no more additional info is required.
  */
 public class LocalizedException extends RuntimeException implements MessageResolvable {
     private final MessageResolvable resolvable;

@@ -9,7 +9,7 @@ allprojects {
     apply plugin: "java"
     apply plugin: "maven"
 
-    ext.springVersion = "5.0.0.RC3"
+    ext.springVersion = "5.0.0.RELEASE"
     ext.springDataVersion = "2.0.0.RC2"
     ext.jackson2Version = "2.9.0"
     ext.lombokVersion = "1.16.16"
