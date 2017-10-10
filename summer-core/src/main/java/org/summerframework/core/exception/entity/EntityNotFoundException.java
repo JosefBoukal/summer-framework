@@ -22,6 +22,10 @@ public class EntityNotFoundException extends LocalizedException {
         super(code, defaultTemplate, args);
     }
 
+    public EntityNotFoundException(String[] codes, String defaultTemplate, Map<String, ?> args) {
+        super(codes, defaultTemplate, null, args);
+    }
+
     public EntityNotFoundException(String[] codes, String defaultTemplate, Exception cause, Map<String, ?> args) {
         super(codes, defaultTemplate, cause, args);
     }
