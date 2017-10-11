@@ -47,6 +47,7 @@ public class JavaModelDefinitionProviderTest {
         assertsOnOrderDefinition(definition);
     }
 
+    @SuppressWarnings("unchecked")
     private void assertsOnOrderDefinition(ModelDefinition<Order> definition) {
         FieldDefinition<?> field;
         TypeInformation<?> componentType;
@@ -117,6 +118,7 @@ public class JavaModelDefinitionProviderTest {
         Assert.assertEquals(String.class, componentDefinition.getTypeInformation().getType());
     }
 
+    @SuppressWarnings("unchecked")
     private void assertOnOrderSummary(ModelDefinition<?> summary) {
         Assert.assertEquals(OrderSummary.class, summary.getTypeInformation().getType());
         Assert.assertEquals("summary", summary.getName());
