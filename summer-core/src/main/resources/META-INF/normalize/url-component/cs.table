@@ -1,0 +1,33 @@
+0020 -
+002D - . - 0 1 2 3 4 5 6 7 8 9
+0041 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+005F _
+0061 a b c d e f g h i j k l m n o p q r s t u v w x y z
+008A S
+008E Z
+0096 - -
+009A s
+009E z
+00C1 A
+00C9 E
+00CD I
+00D3 O
+00DA U
+00DD Y
+00E1 a
+00E9 e
+00ED i
+00F3 o
+00FA u
+00FD y
+010C C c D d
+011A E e
+0147 N n
+0158 R r
+0160 S s
+0164 T t
+016E U u
+017D Z z
+0336 -
+# dashes
+2012 - - - -
