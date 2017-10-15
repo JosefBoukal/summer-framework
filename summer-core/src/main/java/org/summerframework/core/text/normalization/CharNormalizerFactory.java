@@ -8,7 +8,7 @@ import org.summerframework.util.StringUtils;
  *
  * @author Josef Boukal
  */
-public class CharNormalizerFactory extends AbstractNormalizerFactory<Normalizer> {
+public class CharNormalizerFactory extends AbstractTextNormalizerFactory<TextNormalizer> {
 
     protected String location = "/META-INF/normalize/";
 
@@ -30,7 +30,7 @@ public class CharNormalizerFactory extends AbstractNormalizerFactory<Normalizer>
     }
 
     @Override
-    protected Normalizer createNormalizer(String name) {
+    protected TextNormalizer createNormalizer(String name) {
         StringBuilder location = new StringBuilder(CharNormalizerFactory.this.location);
         if (StringUtils.hasLength(name)) {
             location.append(name);

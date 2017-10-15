@@ -18,7 +18,7 @@ public class TextNormalizerTest {
 
     @Test
     public void testNormalizeWithEnglish() throws Exception {
-        TextNormalizer normalizer = new TextNormalizer("/META-INF/normalize/url/");
+        StringNormalizer normalizer = new StringNormalizer("/META-INF/normalize/url/");
         String expected;
         String actual;
         expected = "AAAAAACEEEEIIIIDNOOOOOOUUUUY";
@@ -31,7 +31,7 @@ public class TextNormalizerTest {
 
     @Test
     public void testNormalizeWithCzech() throws Exception {
-        TextNormalizer normalizer = new TextNormalizer("/META-INF/normalize/url/");
+        StringNormalizer normalizer = new StringNormalizer("/META-INF/normalize/url/");
         Locale cs_CZ = new Locale("cs", "CZ");
         long time = System.currentTimeMillis();
         int count = 10000;

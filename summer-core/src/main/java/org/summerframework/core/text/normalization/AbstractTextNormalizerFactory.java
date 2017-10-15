@@ -11,17 +11,17 @@ import java.util.Map;
  *
  * @author Josef Boukal
  */
-abstract class AbstractNormalizerFactory<T extends Normalizer> implements NormalizerFactory {
-    private static final Logger log = LoggerFactory.getLogger(AbstractNormalizerFactory.class);
+abstract class AbstractTextNormalizerFactory<T extends TextNormalizer> implements TextNormalizerFactory {
+    private static final Logger log = LoggerFactory.getLogger(AbstractTextNormalizerFactory.class);
 
-    protected Map<String, Normalizer> normalizers = new HashMap<>();
+    protected Map<String, TextNormalizer> normalizers = new HashMap<>();
 
-    public Normalizer normalizer() {
+    public TextNormalizer normalizer() {
         return normalizer(null);
     }
 
-    public Normalizer normalizer(String name) {
-        Normalizer result = normalizers.get(name);
+    public TextNormalizer normalizer(String name) {
+        TextNormalizer result = normalizers.get(name);
         if (result == null) {
             result = createNormalizer(name);
             normalizers.put(name, result);
@@ -31,8 +31,8 @@ abstract class AbstractNormalizerFactory<T extends Normalizer> implements Normal
 
     protected abstract T createNormalizer(String name);
 
-    public void register(Normalizer normalizer, String name) {
-        Normalizer previous = normalizers.put(name, normalizer);
+    public void register(TextNormalizer normalizer, String name) {
+        TextNormalizer previous = normalizers.put(name, normalizer);
         if (previous != null) {
             log.warn("The " + previous + " normalizer of the '" + name + "' has been replaced by a new one!");
         }

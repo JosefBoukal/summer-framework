@@ -9,55 +9,59 @@ import org.summerframework.core.text.TextParsingException;
 import org.summerframework.core.text.parsing.AbstractResourceParser;
 import org.summerframework.util.StringUtils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 /**
- * A char normalizer is an utility class that is capable of converting characters to other characters using the fast
- * array of char tables.
+ * A string normalizer is an utility class that is capable of converting text characters to other characters (or even)
+ * string using the fast array of String tables.
  *
  * @author Josef Boukal
  */
-public class CharNormalizer implements TextNormalizer {
-    private static final Logger log = LoggerFactory.getLogger(CharNormalizer.class);
-    public static final char[] ASCII_TABLE = new char[127];
+public class StringNormalizer implements TextNormalizer {
+    private static final Logger log = LoggerFactory.getLogger(StringNormalizer.class);
+    public static final String[] ASCII_TABLE = new String[127];
 
     static {
         // from 32 to 125 inclusive
         for (int i = 0x20; i < ASCII_TABLE.length - 1; i++) {
-            ASCII_TABLE[i] = (char) i;
+            ASCII_TABLE[i] = String.valueOf((char) i);
         }
     }
 
     private final String location;
-    private final Map<Locale, char[]> tables = new HashMap<>();
-    private char[] defaultTable;
+    private final Map<Locale, String[]> tables = new HashMap<>();
+    private String[] defaultTable;
 
     // the default (ASCII) normalizer
-    public CharNormalizer() {
+    public StringNormalizer() {
         this.location = "/META-INF/normalize/";
     }
 
-    public CharNormalizer(String location) {
+    public StringNormalizer(String location) {
         // normalize location
-        StringUtils.cleanPath(location);
         if (!location.endsWith("/")) {
             location += "/";
         }
         this.location = location;
     }
 
-    protected char[] getDefaultTable() {
+    protected String[] getDefaultTable() {
         if (defaultTable == null) {
             // one shot table load
             Resource resource = new ClassPathResource(location + "default.table");
             defaultTable = loadTable(resource);
             if (defaultTable == null) {
-                log.warn("Unable to load the default table from the '" + resource.getDescription() + "', using the ASCII table");
+                if (log.isWarnEnabled()) {
+                    log.warn("Unable to load the default table from the '" + resource.getDescription() + "', using the ASCII table");
+                }
                 defaultTable = ASCII_TABLE;
             }
         }
@@ -73,18 +77,18 @@ public class CharNormalizer implements TextNormalizer {
             return text.toString();
         }
         int length = text.length();
-        char[] table = getTable(locale);
+        String[] table = getTable(locale);
         StringBuilder result = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             int index = text.charAt(i);
             if (index >= table.length) {
-                if (log.isDebugEnabled()) {
-                    log.debug("The " + index + " is out of the table range");
+                if (log.isTraceEnabled()) {
+                    log.trace("The " + index + " is out of the table range");
                 }
                 continue;
             }
-            char mapped = table[index];
-            if (mapped == 0) {
+            String mapped = table[index];
+            if (mapped == null) {
                 if (log.isTraceEnabled()) {
                     log.trace("The '" + (char) index + "' is not mapped");
                 }
@@ -95,8 +99,8 @@ public class CharNormalizer implements TextNormalizer {
         return result.toString();
     }
 
-    public char[] getTable(Locale locale) {
-        char[] result = tables.get(locale);
+    public String[] getTable(Locale locale) {
+        String[] result = tables.get(locale);
         if (result == null) {
             result = loadTable(locale);
             tables.put(locale, result);
@@ -104,58 +108,65 @@ public class CharNormalizer implements TextNormalizer {
         return result;
     }
 
-    private char[] loadTable(Locale locale) {
+    private String[] loadTable(Locale locale) {
         List<String> locations = new ArrayList<>(2);
         locations.add(location + locale.getLanguage() + ".table");
-        if (locale.getCountry() != null) {
-            locations.add(location + locale.getLanguage() + "_" + locale.getCountry() + ".table");
+        String country = locale.getCountry();
+        if (StringUtils.hasLength(country)) {
+            locations.add(location + locale.getLanguage() + "_" + country + ".table");
         }
         for (String location : locations) {
             Resource resource = new ClassPathResource(location);
-            char[] result = loadTable(resource);
+            String[] result = loadTable(resource);
             if (result != null) {
                 return result;
             }
         }
-        if (log.isDebugEnabled()) {
-            log.debug("Unable to load a normalization table for the '" + locale + "' locale, using the default table");
+        if (log.isInfoEnabled()) {
+            log.info("Unable to load a normalization table for the '" + locale + "' locale, using the default table");
         }
         return getDefaultTable();
     }
 
-    private char[] loadTable(Resource resource) {
+    private String[] loadTable(Resource resource) {
         if (resource.exists()) {
             TableParser parser = new TableParser(resource);
             try {
                 return parser.getTable();
+            } catch (FileNotFoundException e) {
+                if (log.isWarnEnabled()) {
+                    log.warn("The '" + resource.getDescription() + "' normalization table doesn't exist!");
+                }
             } catch (IOException e) {
-                log.error("Unable to load the '" + resource.getDescription() + "' normalization table!");
+                if (log.isErrorEnabled()) {
+                    log.error("Unable to load the '" + resource.getDescription() + "' normalization table!", e);
+                }
             }
         }
         return null;
     }
 
     public static class TableParser extends AbstractResourceParser {
-        private final List<Line> lines = new ArrayList<>(256);
+        private final Set<Line> lines = new HashSet<>(1024);
         private Line line;
 
         public TableParser(Resource resource) {
             super(resource);
         }
 
-        public char[] getTable() throws IOException, TextParsingException {
+        public String[] getTable() throws IOException, TextParsingException {
             parse();
             int size = getTableSize();
             if (size > MAX_TABLE_SIZE) {
-                log.warn("The " + resource + " has table with the size of " + size + " entries, it has been reduced!");
+                log.warn("The '" + resource + "' has table with the size of " + size + " entries, it has been reduced!");
                 size = MAX_TABLE_SIZE;
             }
-            char[] result = new char[size];
+            String[] result = new String[size];
             for (Line line : lines) {
                 int offset = line.offset;
-                List<Character> values = line.values;
+                List<String> values = line.values;
                 for (int i = 0, valuesSize = values.size(); i < valuesSize; i++) {
-                    Character value = values.get(i);
+                    String value = values.get(i);
                     int index = offset + i;
                     if (index < result.length) {
                         result[index] = value;
@@ -188,13 +199,8 @@ public class CharNormalizer implements TextNormalizer {
                 // read offset
                 readUntil(' ', LF);
                 if (token.length() > 0 && token.charAt(0) == '#') {
-                    token.delete(0, 1);
                     // it is a comment, ignore it
                     readLine();
-                    String comment = token.toString().trim();
-                    if (comment.startsWith("space")) {
-                        processSpaceComment(comment);
-                    }
                 } else {
                     int offset = Integer.parseInt(token.toString(), 16);
                     line = new Line(offset);
@@ -209,29 +215,6 @@ public class CharNormalizer implements TextNormalizer {
             }
         }
 
-        protected void processSpaceComment(String comment) {
-            int equal = comment.indexOf('=');
-            if (equal < 0) {
-                log.info("Unrecognized space comment '" + comment + "'");
-                return;
-            }
-            String value = comment.substring(equal + 1);
-            String[] tokens = value.split(" ");
-            for (String token : tokens) {
-                token = token.trim();
-                if (StringUtils.hasLength(token)) {
-                    try {
-                        int offset = Integer.valueOf(token, 16);
-                        Line line = new Line(offset);
-                        line.add(" ");
-                        lines.add(line);
-                    } catch (NumberFormatException e) {
-                        log.warn("Invalid space comment! " + e.getLocalizedMessage());
-                    }
-                }
-            }
-        }
-
         @Override
         protected void onNewLine() {
             if (line != null) {
@@ -241,15 +224,16 @@ public class CharNormalizer implements TextNormalizer {
             line = null;
         }
 
-        private class Line extends TextNormalizer.Line<Character> {
+        private class Line extends TextNormalizer.Line<String> {
 
             private Line(int offset) {
                 super(offset);
             }
 
             void add(String value) {
-                values.add(value.charAt(0));
+                values.add(value);
             }
         }
     }
+
 }

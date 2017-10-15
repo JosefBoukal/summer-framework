@@ -16,11 +16,21 @@ allprojects {
     ext.slf4jVersion = "1.7.25"
     ext.junit4Version = "4.12"
     ext.logbackVersion = "1.2.3"
+
+    // install all the artifacts to the local repository under the different groupId
+    install {
+        repositories.mavenInstaller {
+            pom.groupId = 'com.github.JosefBoukal.summer-framework'
+        }
+    }
+
 }
 
 subprojects {
     repositories {
         mavenCentral()
+
+        mavenLocal()
 
         maven {
             url("http://repo.spring.io/milestone/")
