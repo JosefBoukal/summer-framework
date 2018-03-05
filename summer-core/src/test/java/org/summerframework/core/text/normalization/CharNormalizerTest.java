@@ -1,20 +1,14 @@
 package org.summerframework.core.text.normalization;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.summerframework.util.DurationUtils;
 
 import java.util.Locale;
 
-/**
- * TextNormalizer Tester.
- *
- * @author Josef Boukal
- */
+@Slf4j
 public class CharNormalizerTest {
-    private static final Logger log = LoggerFactory.getLogger(CharNormalizerTest.class);
 
     /**
      * Method: normalize(CharSequence text)
@@ -24,7 +18,7 @@ public class CharNormalizerTest {
         CharNormalizer normalizer = new CharNormalizer("/META-INF/normalize/url/");
         Locale cs_CZ = new Locale("cs", "CZ");
         long time = System.currentTimeMillis();
-        int count = 100000;
+        int count = 10000;
         for (int i = 0; i < count; i++) {
             normalizer.normalize("Český fájl s velmi dlouhým názvem a šuper čuper češtinou.txt", cs_CZ);
         }

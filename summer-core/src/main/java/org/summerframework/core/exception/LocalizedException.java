@@ -6,14 +6,17 @@ import org.summerframework.core.context.message.MessageResolvable;
 import java.util.Map;
 
 /**
- * The localized runtime exception. All exceptions in an application should be localized so it may be propagated up to
- * User Interfaces without any need of wrapping when no more additional info is required.
+ * The localized exception is an exception that is easy to localize. All exceptions in an application should be
+ * localized so it may be propagated up to User Interfaces without any need of wrapping when no more additional info is
+ * required.
  */
 public class LocalizedException extends RuntimeException implements MessageResolvable {
     private final MessageResolvable resolvable;
     private volatile String message;
 
     /**
+     * Creates a localized exception from the given parameters.
+     *
      * @param code            the error code used for resolving messages
      * @param defaultTemplate the default message template when no localized message could be resolved
      */
@@ -22,6 +25,8 @@ public class LocalizedException extends RuntimeException implements MessageResol
     }
 
     /**
+     * Creates a localized exception from the given parameters.
+     *
      * @param code            the error code used for resolving messages
      * @param defaultTemplate the default message template when no localized message could be resolved
      * @param args            the arguments used for localization
@@ -31,6 +36,8 @@ public class LocalizedException extends RuntimeException implements MessageResol
     }
 
     /**
+     * Creates a localized exception from the given parameters.
+     *
      * @param code            the error code used for resolving messages
      * @param defaultTemplate the default message template when no localized message could be resolved
      * @param cause           the cause of this exception
@@ -41,6 +48,8 @@ public class LocalizedException extends RuntimeException implements MessageResol
     }
 
     /**
+     * Creates a localized exception from the given parameters.
+     *
      * @param codes           the list of error codes used for resolving messages
      * @param defaultTemplate the default message template when no localized message could be resolved
      * @param cause           the cause of this exception
@@ -51,17 +60,14 @@ public class LocalizedException extends RuntimeException implements MessageResol
         this.resolvable = new DefaultMessageResolvable(codes, args, defaultTemplate);
     }
 
+    /**
+     * Creates a localized exception from the given resolvable.
+     *
+     * @param resolvable mandatory message resolvable
+     */
     public LocalizedException(MessageResolvable resolvable) {
         super(null, null);
         this.resolvable = resolvable;
-    }
-
-    /**
-     * Returns the fist error code or null if none is defined.
-     */
-    public String getCode() {
-        String[] codes = resolvable.getCodes();
-        return codes == null || codes.length == 0 ? null : codes[0];
     }
 
     @Override

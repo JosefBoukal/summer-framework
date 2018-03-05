@@ -7,9 +7,6 @@ import org.summerframework.experimental.data.model.definition.provider.product.P
 
 import java.math.BigDecimal;
 
-/**
- * @author Josef Boukal
- */
 @Data
 public class OrderItem {
     private BigDecimal quantity;

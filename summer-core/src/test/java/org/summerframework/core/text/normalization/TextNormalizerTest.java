@@ -10,14 +10,12 @@ import java.util.Locale;
 
 /**
  * TextNormalizer Tester.
- *
- * @author Josef Boukal
  */
 public class TextNormalizerTest {
     private static final Logger log = LoggerFactory.getLogger(TextNormalizerTest.class);
 
     @Test
-    public void testNormalizeWithEnglish() throws Exception {
+    public void testNormalizeWithEnglish() {
         StringNormalizer normalizer = new StringNormalizer("/META-INF/normalize/url/");
         String expected;
         String actual;
@@ -30,7 +28,7 @@ public class TextNormalizerTest {
     }
 
     @Test
-    public void testNormalizeWithCzech() throws Exception {
+    public void testNormalizeWithCzech() {
         StringNormalizer normalizer = new StringNormalizer("/META-INF/normalize/url/");
         Locale cs_CZ = new Locale("cs", "CZ");
         long time = System.currentTimeMillis();

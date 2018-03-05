@@ -1,4 +1,4 @@
-package org.summerframework.core.http;
+package org.summerframework.http;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NamedThreadLocal;
@@ -34,7 +34,7 @@ public class HttpRequestHeadersContext {
         Map<String, String> data = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         data.putAll(headers);
         log.debug("Setting the current HTTP Request Headers context to {}", headers);
-        HttpRequestHeadersContext.context.set(data);
+        context.set(data);
     }
 
     /**

@@ -5,9 +5,6 @@ import org.summerframework.core.model.price.MonetaryAmount;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Josef Boukal
- */
 @Data
 public class OrderPayment {
     private String paymentNumber;

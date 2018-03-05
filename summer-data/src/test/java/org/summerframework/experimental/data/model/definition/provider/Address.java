@@ -4,8 +4,6 @@ import lombok.Data;
 
 /**
  * http://www.uxmatters.com/mt/archives/2008/06/international-address-fields-in-web-forms.php
- *
- * @author Josef Boukal
  */
 @Data
 public class Address {

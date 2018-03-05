@@ -6,8 +6,7 @@ package org.summerframework.core.model.field;
 public interface PathElement<T> {
 
     /**
-     * Returns the value of this element, that is either a field name or an
-     * @return
+     * Returns the value of this element, that is either a field name or an indexed value.
      */
     T value();
 

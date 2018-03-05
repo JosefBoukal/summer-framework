@@ -2,8 +2,6 @@ package org.summerframework.core.text.normalization;
 
 /**
  * A normalizer factory that takes care for {@link TextNormalizer} management.
- *
- * @author Josef Boukal
  */
 public interface TextNormalizerFactory {
 

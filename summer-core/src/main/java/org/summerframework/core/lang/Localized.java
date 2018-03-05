@@ -7,8 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * The annotation used on fields or methods to signal that a field is localized (usually in a persistent storage). For
- * example, you can have a 'title' field on your domain object annotated and it may be stored in the Mongo collection
- * like this:
+ * example, you can have a 'title' field on your domain object annotated and it may be stored in a document like this:
  * <pre>
  *     ...
  *     title: {
@@ -17,7 +16,7 @@ import java.lang.annotation.Target;
  *     }
  *     ...
  * </pre>
- * and the filed will be localized in either English or Czech language depending on the currently selected language. It
+ * Such a filed will be localized in either English or Czech language depending on the currently selected language. It
  * is out of scope of this contract what the "currently selected language" is, but it will usually be the language
  * specified by the {@link org.springframework.context.i18n.LocaleContextHolder}.
  */

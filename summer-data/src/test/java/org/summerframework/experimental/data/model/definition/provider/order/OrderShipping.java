@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.summerframework.core.model.price.Price;
 
-/**
- * @author Josef Boukal
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

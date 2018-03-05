@@ -6,9 +6,6 @@ import org.springframework.data.util.TypeInformation;
 
 import java.lang.reflect.Field;
 
-/**
- * @author Josef Boukal
- */
 @Slf4j
 public class SimpleFieldDefinition<T> extends AbstractFieldDefinition<T> {
 

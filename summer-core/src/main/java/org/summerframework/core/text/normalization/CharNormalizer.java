@@ -19,12 +19,10 @@ import java.util.Map;
 /**
  * A char normalizer is an utility class that is capable of converting characters to other characters using the fast
  * array of char tables.
- *
- * @author Josef Boukal
  */
 public class CharNormalizer implements TextNormalizer {
     private static final Logger log = LoggerFactory.getLogger(CharNormalizer.class);
-    public static final char[] ASCII_TABLE = new char[127];
+    private static final char[] ASCII_TABLE = new char[127];
 
     static {
         // from 32 to 125 inclusive
@@ -42,7 +40,7 @@ public class CharNormalizer implements TextNormalizer {
         this.location = "/META-INF/normalize/";
     }
 
-    public CharNormalizer(String location) {
+    CharNormalizer(String location) {
         // normalize location
         StringUtils.cleanPath(location);
         if (!location.endsWith("/")) {
@@ -51,7 +49,7 @@ public class CharNormalizer implements TextNormalizer {
         this.location = location;
     }
 
-    protected char[] getDefaultTable() {
+    private char[] getDefaultTable() {
         if (defaultTable == null) {
             // one shot table load
             Resource resource = new ClassPathResource(location + "default.table");
@@ -95,7 +93,7 @@ public class CharNormalizer implements TextNormalizer {
         return result.toString();
     }
 
-    public char[] getTable(Locale locale) {
+    private char[] getTable(Locale locale) {
         char[] result = tables.get(locale);
         if (result == null) {
             result = loadTable(locale);
@@ -139,11 +137,11 @@ public class CharNormalizer implements TextNormalizer {
         private final List<Line> lines = new ArrayList<>(256);
         private Line line;
 
-        public TableParser(Resource resource) {
+        TableParser(Resource resource) {
             super(resource);
         }
 
-        public char[] getTable() throws IOException, TextParsingException {
+        char[] getTable() throws IOException, TextParsingException {
             parse();
             int size = getTableSize();
             if (size > MAX_TABLE_SIZE) {
@@ -169,7 +167,7 @@ public class CharNormalizer implements TextNormalizer {
             return result;
         }
 
-        protected int getTableSize() {
+        int getTableSize() {
             int result = 0;
             for (Line line : lines) {
                 int size = line.offset + line.values.size();
@@ -209,7 +207,7 @@ public class CharNormalizer implements TextNormalizer {
             }
         }
 
-        protected void processSpaceComment(String comment) {
+        void processSpaceComment(String comment) {
             int equal = comment.indexOf('=');
             if (equal < 0) {
                 log.info("Unrecognized space comment '" + comment + "'");

@@ -4,9 +4,8 @@ package org.summerframework.core.text.normalization;
 import org.summerframework.util.StringUtils;
 
 /**
- * TODO
- *
- * @author Josef Boukal
+ * The {@link TextNormalizerFactory} provides {@link TextNormalizer} doing very fast normalization based converting a
+ * single char to char.
  */
 public class CharNormalizerFactory extends AbstractTextNormalizerFactory<TextNormalizer> {
 
@@ -18,10 +17,6 @@ public class CharNormalizerFactory extends AbstractTextNormalizerFactory<TextNor
     }
 
     public CharNormalizerFactory(String location) {
-        setLocation(location);
-    }
-
-    public void setLocation(String location) {
         location = StringUtils.cleanPath(location);
         if (!location.endsWith("/")) {
             location += "/";
@@ -31,7 +26,7 @@ public class CharNormalizerFactory extends AbstractTextNormalizerFactory<TextNor
 
     @Override
     protected TextNormalizer createNormalizer(String name) {
-        StringBuilder location = new StringBuilder(CharNormalizerFactory.this.location);
+        StringBuilder location = new StringBuilder(this.location);
         if (StringUtils.hasLength(name)) {
             location.append(name);
         }

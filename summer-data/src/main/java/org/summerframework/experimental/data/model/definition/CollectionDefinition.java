@@ -3,9 +3,6 @@ package org.summerframework.experimental.data.model.definition;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.util.TypeInformation;
 
-/**
- * @author Josef Boukal
- */
 @Slf4j
 public class CollectionDefinition<T> extends AbstractFieldDefinition<T> {
 

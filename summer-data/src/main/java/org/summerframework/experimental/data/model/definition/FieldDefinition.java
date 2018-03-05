@@ -5,9 +5,6 @@ import org.summerframework.core.model.AccessRight;
 
 import java.util.Set;
 
-/**
- * @author Josef Boukal
- */
 public interface FieldDefinition<T> {
 
     String getName();

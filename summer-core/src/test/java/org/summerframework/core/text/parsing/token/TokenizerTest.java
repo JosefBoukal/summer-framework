@@ -5,9 +5,6 @@ import org.junit.Test;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
 
-/**
- * @author Josef Boukal
- */
 public class TokenizerTest {
     private ConversionService conversionService = new DefaultConversionService();
 

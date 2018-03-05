@@ -10,7 +10,8 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @author Josef Boukal
+ * Field access annotation is used to specify access rights on fields. For example, password fields should be write only
+ * and they must never be read nor revealed in JSON responses.
  */
 @Target(ElementType.FIELD)
 @Documented

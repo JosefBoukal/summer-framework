@@ -9,8 +9,6 @@ import java.util.Map;
 /**
  * This exception is used to signal that an entity (usually given in a POST or PATCH request) is invalid, e.g. it is
  * semantically incorrect.
- *
- * @author Josef Boukal
  */
 @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 public class InvalidEntityException extends LocalizedException {
@@ -30,4 +28,10 @@ public class InvalidEntityException extends LocalizedException {
     public InvalidEntityException(String[] codes, String message, Exception cause, Map<String, ?> args) {
         super(codes, message, cause, args);
     }
+
+    @Override
+    public Throwable fillInStackTrace() {
+        return null;
+    }
+
 }

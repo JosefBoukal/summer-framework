@@ -2,8 +2,6 @@ package org.summerframework.core.text.parsing.token;
 
 /**
  * A simple token with value and separator as generic type parameters.
- *
- * @author Josef Boukal
  */
 public class Token<T, S> {
     private final T value;

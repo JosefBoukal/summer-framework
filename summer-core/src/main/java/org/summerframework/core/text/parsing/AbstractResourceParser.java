@@ -13,8 +13,6 @@ import java.util.Locale;
 
 /**
  * Abstract text resource parser base class.
- *
- * @author Josef Boukal
  */
 public abstract class AbstractResourceParser {
     public static final char LF = '\n';
@@ -52,9 +50,7 @@ public abstract class AbstractResourceParser {
     protected abstract void process() throws IOException;
 
     protected void parse() throws IOException, TextParsingException {
-        if (log.isDebugEnabled()) {
-            log.debug("Processing the '" + resource + "' with the '" + encoding + "' encoding");
-        }
+        log.debug("Processing the {} with the '{}' encoding", resource, encoding);
         this.reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), encoding), 1024 * 4);
         try {
             for (; ; ) {

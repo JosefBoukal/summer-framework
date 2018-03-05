@@ -7,9 +7,6 @@ import org.summerframework.core.model.price.Price;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-/**
- * @author Josef Boukal
- */
 @Data
 public class Product {
     private Long id;

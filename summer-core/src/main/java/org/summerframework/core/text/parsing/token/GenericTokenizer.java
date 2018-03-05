@@ -4,9 +4,6 @@ import org.springframework.core.convert.ConversionService;
 
 import java.util.Iterator;
 
-/**
- * @author Josef Boukal
- */
 public class GenericTokenizer<T> extends Tokenizer<T, String> {
 
     private final Class<T> targetType;

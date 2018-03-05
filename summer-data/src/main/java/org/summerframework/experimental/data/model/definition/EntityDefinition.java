@@ -6,9 +6,6 @@ import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
 
-/**
- * @author Josef Boukal
- */
 public class EntityDefinition<T, ID> extends ModelDefinition<T> {
 
     private final FieldDefinition<ID> idField;

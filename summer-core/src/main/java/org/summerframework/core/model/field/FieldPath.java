@@ -147,7 +147,7 @@ public class FieldPath implements Iterable<PathElement<?>> {
      * Appends the given path to this path and returns the result. It may return this path if the source path is not
      * given.
      *
-     * @param path the optional path to append
+     * @param path the optional path to append to this path
      */
     public FieldPath append(FieldPath path) {
         if (path == null) {
@@ -549,10 +549,11 @@ public class FieldPath implements Iterable<PathElement<?>> {
                     return token.toString();
                 }
                 if (ch == ']') {
-                    // TODO PathSyntaxException?
                     if (!inArray) {
-                        throw new IllegalStateException("End of array ']' encountered at position " + i + " in the '"
-                                + new String(value) + "' text, but a start character '[' is missing!");
+                        throw new FieldPathException("field.path.invalid",
+                                "End of array ']' encountered at position " + i + " in the '" + new String(value) +
+                                        "' path, but a start character '[' is missing!"
+                        );
                     }
                     inArray = false;
                     String value = token.toString();
@@ -567,20 +568,6 @@ public class FieldPath implements Iterable<PathElement<?>> {
             }
             return token.toString();
         }
-    }
-
-    public static PathElement<?>[] concat(int index, PathElement<?>[] children) {
-        PathElement<?>[] result = new PathElement[1 + children.length];
-        result[0] = new IndexedElement(index);
-        System.arraycopy(children, 0, result, 1, children.length);
-        return result;
-    }
-
-    public static PathElement<?>[] concat(String field, PathElement<?>[] children) {
-        PathElement<?>[] result = new PathElement[1 + children.length];
-        result[0] = new FieldElement(field);
-        System.arraycopy(children, 0, result, 1, children.length);
-        return result;
     }
 
 }

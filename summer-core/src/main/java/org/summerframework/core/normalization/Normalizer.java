@@ -1,9 +1,7 @@
 package org.summerframework.core.normalization;
 
 /**
- * A normalizer is convert value from a given format to its normalized form.
- *
- * @author Josef Boukal
+ * A normalizer is a value converter from a given type and different formats to its normalized form.
  */
 public interface Normalizer<T> {
 

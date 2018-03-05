@@ -4,8 +4,6 @@ import org.springframework.core.io.Resource;
 
 /**
  * Provides information on a token location in a text resource.
- *
- * @author Josef Boukal
  */
 public class Location {
     private final Resource resource;

@@ -10,8 +10,6 @@ import java.util.Map;
  * The generic Model Definition class that describes Java POJOs, JavaBeans or simply data models so that a model
  * definition may be extended programmatically. There is no need for a model or entity to have a Java (class)
  * representation either.
- *
- * @author Josef Boukal
  */
 public class ModelDefinition<T> extends AbstractFieldDefinition<T> {
 
@@ -35,9 +33,9 @@ public class ModelDefinition<T> extends AbstractFieldDefinition<T> {
             throw new IllegalStateException("Unable to add the " + definition + " field definition of the '" +
                     fieldName + "' field on the " + this + " sealed definition!");
         }
-        FieldDefinition<?> existing = this.fields.put(fieldName, definition);
+        FieldDefinition<?> existing = this.fields.putIfAbsent(fieldName, definition);
         if (existing != null) {
-            throw new IllegalArgumentException("Failed to add the '" + definition.getName() +
+            throw new IllegalStateException("Failed to add the '" + definition.getName() +
                     "' field definition, it already exists!"
             );
         }

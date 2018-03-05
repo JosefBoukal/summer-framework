@@ -6,8 +6,6 @@ import java.util.List;
 
 /**
  * The generic tokenizer.
- *
- * @author Josef Boukal
  */
 public abstract class Tokenizer<T, S> implements Iterable<Token<T, S>>, Iterator<Token<T, S>> {
 

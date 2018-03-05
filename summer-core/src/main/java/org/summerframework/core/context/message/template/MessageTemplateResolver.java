@@ -12,7 +12,8 @@ public interface MessageTemplateResolver {
      * the given locale exists.
      *
      * @param locale the optional locale, some default should be used when none specified
-     * @param codes  the ordered list of codes to try to resolve a message template from
+     * @param codes  the ordered list of codes (starting from the most specific) to try to resolve a message template
+     *               from
      */
     String resolveTemplate(Locale locale, String[] codes);
 

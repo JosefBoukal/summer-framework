@@ -6,8 +6,6 @@ import org.springframework.core.NamedThreadLocal;
 /**
  * The helper class for all the {@link ThreadLocal} context providers that also supports the {@link
  * InheritableThreadLocal} as well.
- *
- * @author Josef Boukal
  */
 public class ThreadLocalContextHelper<T> {
 

@@ -7,14 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO
- *
- * @author Josef Boukal
+ * Abstract base class for {@link TextNormalizerFactory}(ies).
  */
 abstract class AbstractTextNormalizerFactory<T extends TextNormalizer> implements TextNormalizerFactory {
     private static final Logger log = LoggerFactory.getLogger(AbstractTextNormalizerFactory.class);
 
-    protected Map<String, TextNormalizer> normalizers = new HashMap<>();
+    private Map<String, TextNormalizer> normalizers = new HashMap<>();
 
     public TextNormalizer normalizer() {
         return normalizer(null);

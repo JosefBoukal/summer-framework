@@ -2,7 +2,6 @@ package org.summerframework.http;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.summerframework.core.http.HttpRequestHeadersContext;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

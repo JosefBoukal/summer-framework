@@ -4,8 +4,6 @@ import java.util.Iterator;
 
 /**
  * TODO
- *
- * @author Josef Boukal
  */
 public class StringTokenizer extends Tokenizer<String, String> {
 

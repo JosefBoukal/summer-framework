@@ -7,9 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * The price with {@link #getAmount()}, {@link #getNoVat()}, {@link #getTax()} and {@link #getVat()} fields.
- *
- * @author Josef Boukal
+ * The price model/holder with {@link #getAmount()}, {@link #getNoVat()}, {@link #getTax()} and {@link #getVat()}
+ * fields.
  */
 @Data
 public class Price {
@@ -65,12 +64,7 @@ public class Price {
         this.amount = amount;
     }
 
-    public Price(String currency,
-                 BigDecimal amount,
-                 BigDecimal noVat,
-                 BigDecimal vat,
-                 BigDecimal tax)
-    {
+    public Price(String currency, BigDecimal amount, BigDecimal noVat, BigDecimal vat, BigDecimal tax) {
         this.currency = currency;
         this.amount = amount;
         this.noVat = noVat;
@@ -110,7 +104,7 @@ public class Price {
         if (price instanceof Number || price instanceof String) {
             return new Price(null, new BigDecimal(price.toString()));
         }
-        throw new IllegalStateException("Creating a Price from the " + price.getClass().getName() + " type is not supported!");
+        throw new IllegalArgumentException("Creating a Price from the " + price.getClass().getName() + " type is not supported!");
     }
 
     private static BigDecimal toBigDecimal(Map<String, ?> price, String field) {
@@ -144,7 +138,7 @@ public class Price {
     }
 
     /**
-     * Returns a new copy of this price.
+     * Returns a new deep copy of this price.
      */
     public Price copy() {
         return new Price(currency, amount, noVat, vat, tax);

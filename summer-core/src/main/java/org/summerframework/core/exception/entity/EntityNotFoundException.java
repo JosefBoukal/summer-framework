@@ -8,8 +8,6 @@ import java.util.Map;
 
 /**
  * This exception is used to signal that a required entity doesn't exist.
- *
- * @author Josef Boukal
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class EntityNotFoundException extends LocalizedException {
@@ -28,6 +26,11 @@ public class EntityNotFoundException extends LocalizedException {
 
     public EntityNotFoundException(String[] codes, String defaultTemplate, Exception cause, Map<String, ?> args) {
         super(codes, defaultTemplate, cause, args);
+    }
+
+    @Override
+    public Throwable fillInStackTrace() {
+        return null;
     }
 
 }

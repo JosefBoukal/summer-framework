@@ -8,14 +8,19 @@ import java.util.Map;
 
 /**
  * This exception is usually used to signal that an entity to create already exists.
- *
- * @author Josef Boukal
  */
 @ResponseStatus(HttpStatus.CONFLICT)
 public class EntityAlreadyExistsException extends LocalizedException {
 
-    public EntityAlreadyExistsException(String code, String message, Map<String, ?> args) {
-        super(code, message, args);
+    /**
+     * Creates a new exception from the given parameters.
+     *
+     * @param code            the error code used for resolving messages
+     * @param defaultTemplate the default message template when no localized message could be resolved
+     * @param args            the arguments used for localization
+     */
+    public EntityAlreadyExistsException(String code, String defaultTemplate, Map<String, ?> args) {
+        super(code, defaultTemplate, args);
     }
 
     @Override

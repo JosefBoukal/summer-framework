@@ -8,9 +8,6 @@ import org.summerframework.util.StringUtils;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * @author Josef Boukal
- */
 public abstract class AbstractFieldDefinition<T> implements FieldDefinition<T> {
     protected final String name;
     protected final String type;

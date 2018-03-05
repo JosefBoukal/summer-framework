@@ -22,8 +22,6 @@ import java.util.Set;
 /**
  * A string normalizer is an utility class that is capable of converting text characters to other characters (or even)
  * string using the fast array of String tables.
- *
- * @author Josef Boukal
  */
 public class StringNormalizer implements TextNormalizer {
     private static final Logger log = LoggerFactory.getLogger(StringNormalizer.class);

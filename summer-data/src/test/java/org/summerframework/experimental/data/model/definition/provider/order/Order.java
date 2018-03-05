@@ -7,9 +7,6 @@ import org.summerframework.experimental.data.model.definition.provider.BasicEnti
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author Josef Boukal
- */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Order extends BasicEntity {

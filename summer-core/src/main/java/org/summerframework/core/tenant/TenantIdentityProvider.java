@@ -3,6 +3,8 @@ package org.summerframework.core.tenant;
 /**
  * The contract for providers to provide or resolve a tenant identification. A service is usually shared between several
  * tenants and this provider is used to identify the tenant of a requested service.
+ * <p>
+ * TODO move to some other Tenantable Java Project.
  */
 public interface TenantIdentityProvider {
 

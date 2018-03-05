@@ -5,9 +5,6 @@ import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Josef Boukal
- */
 public class BasicEntity {
     @Id
     private String id;

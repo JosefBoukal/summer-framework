@@ -1,9 +1,5 @@
 package org.summerframework.util;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
-
 /**
  * The duration utility class.
  */
@@ -19,7 +15,7 @@ public abstract class DurationUtils {
      * This method returns the given <code>time</code> using milliseconds, seconds, minutes, hours and days. For
      * example, given 1234 it returns "1 sec 234 ms". Any part with 0 value is skipped (not printed).
      *
-     * @param milliseconds the time interval in milliseconds.
+     * @param milliseconds the time interval in milliseconds
      */
     public static String milliDuration(long milliseconds) {
         if (milliseconds == 0) {
@@ -29,10 +25,11 @@ public abstract class DurationUtils {
     }
 
     /**
-     * This method returns the given time using microseconds, milliseconds, seconds, minutes, hours and days. For
-     * example, given 1234001 it returns "1 sec 234 ms 1 µs". Any part with 0 value is skipped (not printed).
+     * This method returns duration of the given nanoseconds as microseconds, milliseconds, seconds, minutes, hours and
+     * days. For example, given 1234001000 it returns "1 sec 234 ms 1 µs". Any part with 0 value is skipped (not
+     * printed).
      *
-     * @param nanoseconds the time interval in nanoseconds.
+     * @param nanoseconds the time interval in nanoseconds
      */
     public static String microDuration(long nanoseconds) {
         long microseconds = nanoseconds / 1000;
@@ -42,7 +39,7 @@ public abstract class DurationUtils {
         return duration(microseconds, MICRO_UNITS, MICRO_MODULI);
     }
 
-    protected static String duration(long duration, String[] units, long[] moduli) {
+    private static String duration(long duration, String[] units, long[] moduli) {
         // normalize to positive duration
         duration = Math.abs(duration);
         StringBuilder result = new StringBuilder();
@@ -67,13 +64,6 @@ public abstract class DurationUtils {
             }
         }
         return result.toString();
-    }
-
-    public static LocalDateTime toLocalDateTime(Date date) {
-        if (date == null) {
-            return null;
-        }
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
 }

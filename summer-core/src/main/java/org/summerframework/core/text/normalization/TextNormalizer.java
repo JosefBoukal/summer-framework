@@ -10,8 +10,6 @@ import java.util.Locale;
 
 /**
  * A text normalizer is an utility that converts character sequence to normalized values.
- *
- * @author Josef Boukal
  */
 public interface TextNormalizer {
 

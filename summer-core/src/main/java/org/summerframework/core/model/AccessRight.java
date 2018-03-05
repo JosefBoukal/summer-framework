@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 /**
- * @author Josef Boukal
+ * An enumeration used to define read and/or write access right on an element (such as field).
  */
 public enum AccessRight {
 
